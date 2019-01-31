@@ -1,0 +1,25 @@
+---
+title: "BRAG Meeting Introduction"
+author: "Daniel W. Kennedy"
+date: "January 31, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load in the data:
+
+```{r}
+data.list <- readRDS(file = "brag-meeting-data.RDS")
+names(data.list)
+```
+
+## Extracting predictions and adjusted performance values:
+
+```{r}
+library(randomForest)
+predictions <- predict(data.list$rf_fit$finalModel,data.list$data)
+adjusted_perf <- data.list$data$y - predictions
+```
